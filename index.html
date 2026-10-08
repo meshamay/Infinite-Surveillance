@@ -10,12 +10,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --blue:#0B4BA8; --blue-deep:#082F6B; --red:#E8262B; --tint:#EAF1FB; --bg:#FFFFFF; --ink:#12233F; --muted:#51607A; --line:#D9E3F2; --card:#F5F8FD;
+  --blue:#14745D; --blue-deep:#172722; --red:#E66A43; --tint:#E8EEE8; --bg:#F6F5EF; --ink:#17211E; --muted:#596660; --line:#D6DDD7; --card:#FBFAF6;
   --head:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif; --body:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
   box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--blue:#6FA3F5;--blue-deep:#0F2547;--tint:#12284A;--bg:#0C1626;--ink:#E8EEF8;--muted:#A3B1C9;--line:#223552;--card:#122038;--red:#FF5A5F}}
-:root[data-theme="dark"]{--blue:#6FA3F5;--blue-deep:#0F2547;--tint:#12284A;--bg:#0C1626;--ink:#E8EEF8;--muted:#A3B1C9;--line:#223552;--card:#122038;--red:#FF5A5F}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--blue:#77B59C;--blue-deep:#101C18;--tint:#1B2B24;--bg:#101713;--ink:#E8EEE9;--muted:#A2B0A8;--line:#29372F;--card:#17211B;--red:#F18461}}
+:root[data-theme="dark"]{--blue:#77B59C;--blue-deep:#101C18;--tint:#1B2B24;--bg:#101713;--ink:#E8EEE9;--muted:#A2B0A8;--line:#29372F;--card:#17211B;--red:#F18461}
 html{scroll-behavior:smooth;scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
 *,*::before,*::after{box-sizing:inherit}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 1.05rem/1.65 var(--body);-webkit-font-smoothing:antialiased}
@@ -45,31 +45,48 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:co
 @media(max-width:560px){.nav{gap:8px}.links{gap:6px}.links .btn{padding:8px 10px;font-size:.8rem}.desktop-label{display:none}.mobile-label{display:inline}}
 
 /* hero */
-.hero{padding:70px 0 90px;background:linear-gradient(180deg,var(--tint),var(--bg))}
-.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
-.hero h1{font-size:clamp(2.4rem,6vw,4.1rem);font-weight:800;margin-bottom:20px}
-.hero .lead{font-size:1.2rem;margin-bottom:28px}
+.hero{position:relative;overflow:hidden;padding:72px 0 76px;background:var(--blue-deep);color:#F6F5EF}
+.hero::before{position:absolute;inset:0;content:"";background:linear-gradient(90deg,#172722 0%,#172722 44%,#172722c9 62%,#17272230 100%),repeating-linear-gradient(0deg,transparent 0 47px,#ffffff08 48px 49px);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1fr .95fr;gap:54px;align-items:center}
+.hero h1{max-width:12ch;font-size:clamp(2.7rem,5.2vw,4.7rem);font-weight:800;margin:16px 0 20px;color:#fff}
+.hero .lead{font-size:1.12rem;margin-bottom:28px;color:#D0D8D2;max-width:54ch}
+.hero-kicker{display:inline-flex;align-items:center;gap:9px;color:#C4D1C7;text-transform:uppercase;font-size:.77rem;font-weight:700;letter-spacing:.12em}
+.hero-kicker::before{content:"";width:26px;height:2px;background:var(--red)}
 .cta{display:flex;gap:12px;flex-wrap:wrap}
-.lens{width:100%;max-width:380px;justify-self:center}
+.hero .btn{background:var(--red);color:#17211E!important;border-radius:4px;padding:13px 19px}
+.hero .btn:hover{background:#F28A65}
+.hero .btn.ghost{color:#F6F5EF!important;box-shadow:inset 0 0 0 1px #CAD4CC;background:transparent}
+.hero .btn.ghost:hover{background:#ffffff12}
+.lens{display:none}
+.hero-visual{position:relative;min-height:400px;overflow:hidden;border:1px solid #ffffff45;background:#26342D}
+.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.72) contrast(1.06)}
+.hero-visual::after{position:absolute;inset:0;content:"";background:linear-gradient(0deg,#111a16e8,transparent 54%),linear-gradient(90deg,#111a1635,transparent 55%)}
+.hero-live{position:absolute;top:18px;left:18px;z-index:1;display:flex;align-items:center;gap:8px;padding:7px 10px;background:#111a16d9;color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.hero-live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px #e66a4330}
+.hero-caption{position:absolute;left:22px;right:22px;bottom:20px;z-index:1;display:flex;justify-content:space-between;align-items:end;gap:16px;color:#fff}
+.hero-caption strong{display:block;font:700 1.1rem var(--head)}
+.hero-caption span{display:block;color:#D0D8D2;font-size:.85rem}
+.hero-index{font:700 .78rem var(--body);letter-spacing:.08em;color:#F5A384}
 .rec{animation:pulse 2s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
 @keyframes pulse{50%{opacity:.25}}
 @media(prefers-reduced-motion:reduce){.rec{animation:none}html{scroll-behavior:auto}.btn{transition:none}}
-@media(max-width:820px){.hero .wrap{grid-template-columns:1fr}.lens{max-width:240px;order:-1;justify-self:start}}
-
 /* trust strip */
-.facts{display:flex;flex-wrap:wrap;gap:12px 28px;padding:22px 0;border-bottom:1px solid var(--line);color:var(--muted);font-weight:500}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;padding:0;border-bottom:1px solid var(--line);color:var(--muted);font-size:.91rem;font-weight:500}
+.facts span{padding:21px 18px;border-right:1px solid var(--line)}
+.facts span:first-child{padding-left:0}
+.facts span:last-child{border-right:0}
 .facts b{color:var(--ink)}
 
 /* services */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:34px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:34px;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.card{background:var(--card);border:0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:0;padding:25px}
 .card h3{font-size:1.25rem;margin-bottom:10px}
 .card p{color:var(--muted);font-size:.98rem}
 .card ul{margin:14px 0 0;padding-left:18px;color:var(--ink);font-size:.95rem}
-.ico{width:46px;height:46px;border-radius:14px;background:var(--tint);display:grid;place-items:center;margin-bottom:16px}
-.ico svg{width:24px;height:24px;stroke:var(--blue);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.card.big{grid-column:span 2}
-@media(max-width:560px){.card.big{grid-column:auto}}
+.ico{position:relative;width:48px;height:48px;border:1px solid color-mix(in srgb,var(--blue) 18%,var(--line));border-radius:4px;background:var(--tint);display:grid;place-items:center;margin-bottom:16px;color:var(--blue)}
+.ico::after{position:absolute;right:4px;bottom:4px;width:5px;height:5px;border-radius:1px;background:var(--red);content:""}
+.ico svg{display:block;width:28px;height:28px;flex:none;overflow:visible;stroke:var(--blue);fill:none;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+.card.big{grid-column:auto}
 
 /* process */
 .steps{counter-reset:s;list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px}
@@ -79,9 +96,9 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:co
 .steps p{color:var(--muted);font-size:.97rem}
 
 /* clients */
-.alt{background:var(--tint)}
+.alt{background:#E9EDE6}
 .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;padding:0;list-style:none}
-.chips li{background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:9px 18px;font-weight:500}
+.chips li{background:transparent;border:1px solid #BBC7BD;border-radius:3px;padding:8px 13px;font-size:.9rem;font-weight:500}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:34px}
 @media(max-width:760px){.split{grid-template-columns:1fr}}
 
@@ -89,11 +106,15 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:co
 .contact{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
 @media(max-width:760px){.contact{grid-template-columns:1fr}}
 .people{display:grid;gap:14px;margin-top:22px}
-.person{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 20px}
+.person{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--blue);border-radius:3px;padding:16px 20px}
 .person b{display:block;font-family:var(--head);font-size:1.1rem}
 .person span{color:var(--muted);font-size:.9rem}
 .person a{display:block;text-decoration:none;color:var(--blue);font-weight:500;overflow-wrap:anywhere}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr 1fr;gap:28px}.hero-visual{min-height:340px}.facts{grid-template-columns:repeat(2,minmax(0,1fr))}.facts span:nth-child(2){border-right:0}.facts span:nth-child(-n+2){border-bottom:1px solid var(--line)}.facts span:nth-child(3){padding-left:0}}
+@media(max-width:700px){.hero{padding:50px 0 54px}.hero .wrap{grid-template-columns:1fr;gap:30px}.hero h1{max-width:13ch;font-size:clamp(2.7rem,10vw,4rem)}.hero-visual{min-height:300px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card{padding:19px}}
+@media(max-width:480px){section{padding:58px 0}.hero-visual{min-height:260px}.hero-caption{left:15px;right:15px;bottom:14px}.facts span{padding:15px 10px;font-size:.83rem}.grid{grid-template-columns:1fr}.card.big{grid-column:auto}.steps{grid-template-columns:1fr 1fr;gap:22px 16px}.chips li{font-size:.84rem;padding:7px 10px}}
 form{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;display:grid;gap:14px}
+#f{background:#E9EDE6;border-radius:4px}
 label{font-weight:600;font-size:.95rem;display:grid;gap:6px}
 input,textarea,select{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;width:100%}
 input:focus,textarea:focus,select:focus{border-color:var(--blue);outline:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 25%,transparent)}
@@ -106,37 +127,89 @@ footer b{color:#fff}
 /* staff portal prototype */
 .portal-link{white-space:nowrap}
 .portal-dialog{width:min(1160px,calc(100% - 28px));max-width:none;max-height:94dvh;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);box-shadow:0 24px 90px #071a3540}
+.portal-dialog:has(#login-view:not([hidden])){width:min(900px,calc(100% - 28px));background:var(--card);border-radius:10px}
 .portal-dialog::backdrop{background:#071a3580;backdrop-filter:blur(4px)}
 .portal-shell{padding:clamp(18px,4vw,32px)}
+.portal-dialog:has(#login-view:not([hidden])) .portal-shell{padding:clamp(15px,2.4vw,24px)}
 .portal-top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:18px}
 .portal-top h2{margin:0 0 6px;font-size:1.8rem}
 .portal-top p,.portal-note{color:var(--muted);font-size:.9rem}
 .portal-close{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;width:40px;height:40px;font-size:1.4rem;cursor:pointer;flex:none}
 .portal-warning{margin:16px 0;padding:11px 14px;background:color-mix(in srgb,var(--red) 9%,var(--bg));border-left:3px solid var(--red);color:var(--ink);font-size:.88rem}
+.portal-dialog:has(#login-view:not([hidden])) .portal-top{align-items:center;border-bottom:0;padding:0 0 14px}
+.portal-dialog:has(#login-view:not([hidden])) .portal-top h2{font-size:1.25rem;margin:0;text-transform:uppercase;letter-spacing:.08em}
+.portal-dialog:has(#login-view:not([hidden])) .portal-top p{font-size:.8rem;margin-top:3px}
+.portal-dialog:has(#login-view:not([hidden])) .portal-close{width:36px;height:36px;background:transparent;border-color:var(--line);font-size:1.2rem}
 .portal-view[hidden],.portal-section[hidden]{display:none}
-.portal-login{max-width:480px;margin:28px auto 8px}
-.portal-login h3{font-size:1.45rem;margin-bottom:8px}
-.portal-login .portal-form{margin-top:20px}
+.portal-login{display:grid;grid-template-columns:minmax(220px,.78fr) minmax(0,1.22fr);max-width:790px;min-height:420px;margin:0 auto;padding:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg);box-shadow:0 12px 36px #17272212}
+.portal-login-side{position:relative;display:flex;flex-direction:column;justify-content:space-between;min-height:420px;overflow:hidden;padding:27px;background:var(--blue-deep);color:#F6F5EF}
+.portal-login-side::after{position:absolute;right:-52px;bottom:48px;width:190px;height:190px;border:1px solid #ffffff25;border-radius:50%;content:"";box-shadow:0 0 0 22px #ffffff08,0 0 0 44px #ffffff06;pointer-events:none}
+.portal-login-kicker,.portal-login-label,.portal-form-kicker{font-size:.68rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.portal-login-kicker{color:#C4D1C7}
+.portal-login-symbol{position:relative;display:grid;place-items:center;width:88px;height:88px;margin:auto 0;border:2px solid var(--blue);border-radius:50%;z-index:1}
+.portal-login-symbol::before{position:absolute;inset:12px;border:2px solid #9CB8A7;border-radius:50%;content:""}
+.portal-login-symbol i{width:14px;height:14px;border-radius:50%;background:var(--red)}
+.portal-login-brand{font:700 1.45rem/1.04 var(--head)}
+.portal-login-label{margin-top:12px;color:#F5A384}
+.portal-login-content{align-self:center;width:100%;max-width:410px;margin:auto;padding:34px clamp(24px,5vw,54px)}
+.portal-login-content h3{font-size:2rem;margin:8px 0}
+.portal-form-kicker{color:var(--blue)}
+.portal-login-content .portal-note{line-height:1.5}
+.portal-login-content .portal-form{margin-top:23px}
+.portal-login-content #setup-view .portal-form{margin-top:20px}
+.portal-login-content #setup-view h3{font-size:1.7rem}
+.portal-login .portal-form{background:transparent;border:0;border-radius:0;padding:0;box-shadow:none}
+.portal-login .portal-form label{gap:7px;color:var(--ink);font-size:.84rem}
+.portal-login .portal-form input{min-height:46px;padding:10px 12px;border-radius:5px;background:var(--bg);font-size:.94rem}
+.portal-login .portal-form input:focus{border-color:var(--blue);box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 17%,transparent)}
+.portal-login .portal-form .btn{display:flex;justify-content:space-between;align-items:center;width:100%;min-height:46px;margin-top:3px;padding:11px 14px;border-radius:5px;background:var(--blue-deep);color:#fff!important}
+.portal-login .portal-form .btn:hover{background:var(--blue)}
+.portal-login .portal-form [role="status"]{min-height:0}
+.portal-login-content>.portal-warning{display:flex;align-items:center;gap:10px;margin:20px 0 0;padding:10px 11px;border:1px solid var(--line);border-left:0;border-radius:5px;background:var(--card);font-size:.77rem;line-height:1.4}
+.portal-warning-mark{display:grid;place-items:center;width:20px;height:20px;border:1px solid var(--blue);border-radius:50%;color:var(--blue);font:700 .75rem var(--head);flex:none}
+.portal-login-content>.portal-warning strong{font-weight:700}
 .portal-demo-accounts{margin-top:18px;padding:14px;background:var(--tint);border-radius:6px;font-size:.87rem}
 .portal-demo-accounts p+p{margin-top:5px}
 .portal-session{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:18px 0}
-.portal-user{font-weight:700}.portal-nav{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line);margin-bottom:20px}
-.portal-nav button{white-space:nowrap;padding:10px 13px;border:0;border-bottom:3px solid transparent;background:transparent;color:var(--muted);font:600 .94rem var(--body);cursor:pointer}
-.portal-nav button[aria-selected="true"]{border-color:var(--blue);color:var(--blue)}
+.portal-session{position:relative;margin:0 -8px 20px;padding:14px 16px;border:1px solid var(--line);border-radius:7px;background:var(--card)}
+.portal-session>div:first-child{display:grid;grid-template-columns:auto auto;align-items:center;column-gap:10px;row-gap:2px}
+.portal-user{font-weight:700;font-family:var(--head);font-size:1.02rem}
+.portal-session #session-role{margin:0;color:var(--muted);font-size:.82rem}
+.portal-session details{grid-column:1/-1;margin-top:4px}
+.portal-session details summary{width:max-content;cursor:pointer;color:var(--blue);font-weight:600}
+.portal-session details[open]{width:min(100%,420px)}
+.portal-session .portal-form{margin-top:12px;padding:14px;background:var(--bg);border:1px solid var(--line);border-radius:6px}
+.portal-nav{display:flex;gap:5px;overflow-x:auto;padding:5px;border:1px solid var(--line);border-radius:8px;background:var(--card);margin:0 0 22px;scrollbar-width:thin}
+.portal-nav button{white-space:nowrap;padding:9px 13px;border:0;border-radius:5px;background:transparent;color:var(--muted);font:600 .88rem var(--body);cursor:pointer;transition:background .15s,color .15s}
+.portal-nav button:hover{background:var(--tint);color:var(--ink)}
+.portal-nav button[aria-selected="true"]{background:var(--blue-deep);color:#fff;box-shadow:0 1px 3px #17272228}
+.employee-nav{margin-top:16px}
+.employee-nav .employee-tab-count{display:inline-grid;place-items:center;min-width:19px;height:19px;margin-left:5px;padding:0 5px;border-radius:10px;background:var(--red);color:#17211E;font-size:.72rem;font-weight:700}
+.employee-nav button[aria-selected="true"] .employee-tab-count{background:#F5A384;color:#17211E}
+.employee-section[hidden]{display:none}
+.employee-clock-panel{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:0 20px;padding:15px 20px;margin:0;background:var(--blue-deep);border-color:var(--blue-deep);color:#F6F5EF}
+.employee-clock-panel h3{margin:0;color:#fff}
+.employee-clock-panel .portal-clock{grid-column:2;grid-row:1 / span 2;min-width:235px;margin:0;padding:0;border:0;background:transparent}
+.employee-clock-panel .portal-note{grid-column:1;margin:5px 0 0;color:#C4D1C7}
 .portal-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0}
 .portal-stat{padding:14px;background:var(--card);border:1px solid var(--line);border-radius:6px}
 .portal-stat strong{display:block;font:700 1.55rem var(--head);overflow-wrap:anywhere}
 .portal-stat span{color:var(--muted);font-size:.84rem}
 .portal-columns{display:grid;grid-template-columns:minmax(240px,.75fr) minmax(0,1.6fr);gap:16px;align-items:start}
-.portal-panel{padding:17px;background:var(--card);border:1px solid var(--line);border-radius:8px;margin:0 0 16px}
-.portal-panel h3{font-size:1.1rem;margin-bottom:13px}
+.portal-panel{padding:20px;background:var(--card);border:1px solid var(--line);border-radius:7px;margin:0 0 16px;box-shadow:0 2px 8px #17272208}
+.portal-panel h3{font-size:1.12rem;margin-bottom:16px}
 .portal-form{display:grid;gap:11px}
-.portal-form label{font-size:.88rem}
-.portal-form input,.portal-form select,.portal-form textarea{border-radius:7px;padding:10px 11px}
+.portal-view:not(.portal-login) .portal-form{background:transparent;border:0;border-radius:0;padding:0;box-shadow:none}
+.portal-form label{font-size:.85rem;gap:6px}
+.portal-form input,.portal-form select,.portal-form textarea{border-radius:5px;padding:10px 11px;background:var(--bg)}
 .portal-form textarea{min-height:78px}
-.portal-form .btn{border-radius:7px;justify-self:start}
+.portal-form .btn{border-radius:5px;justify-self:start;padding:10px 15px}
 .portal-form .btn:disabled{opacity:.55;cursor:not-allowed}
 .portal-table-wrap{overflow-x:auto}
+.portal-table-filters{display:flex;align-items:end;gap:9px;flex-wrap:wrap;margin:-2px 0 13px}
+.portal-table-filters label{display:grid;gap:4px;min-width:140px;color:var(--muted);font-size:.69rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.portal-table-filters input,.portal-table-filters select{width:100%;min-height:36px;padding:6px 9px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);font:500 .84rem var(--body);letter-spacing:normal;text-transform:none}
+.portal-table-filters .portal-filter-clear{width:36px;min-width:36px;height:36px}
 .portal-table{width:100%;border-collapse:collapse;text-align:left;font-size:.89rem}
 .portal-table th,.portal-table td{padding:10px 9px;border-bottom:1px solid var(--line);vertical-align:top}
 .portal-table th{color:var(--muted);font-size:.76rem;text-transform:uppercase}
@@ -148,7 +221,54 @@ footer b{color:#fff}
 .portal-record h4{font:700 1rem var(--head);margin:0 0 4px}
 .portal-record p,.portal-record small{color:var(--muted);font-size:.88rem;overflow-wrap:anywhere}
 .portal-record small{display:block;margin-top:6px}
+.portal-report-heading{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:15px}
+.portal-report-heading h3{margin:0 0 5px}
+.portal-report-heading .portal-note{margin:0}
+.portal-report-filters{display:flex;align-items:end;gap:8px;flex:none}
+.portal-report-filters label{display:grid;gap:4px;color:var(--muted);font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.portal-report-filters select,.portal-report-filters input{width:132px;min-height:36px;padding:6px 9px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);font:500 .83rem var(--body);letter-spacing:normal;text-transform:none}
+.portal-report-filters input{width:145px}
+.portal-filter-clear{width:36px;height:36px;border:1px solid var(--line);border-radius:4px;background:transparent;color:var(--muted);font-size:1.2rem;cursor:pointer}
+.portal-filter-clear:hover{border-color:var(--red);color:var(--red)}
 .portal-employee-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+.portal-employee-grid{grid-template-columns:minmax(270px,.78fr) minmax(0,1.22fr);gap:18px}
+.portal-employee-grid>div{min-width:0}
+.portal-view#employee-view>.portal-summary{gap:0;margin:8px 0 20px;border:1px solid var(--line);border-radius:7px;background:var(--card);overflow:hidden}
+.portal-view#employee-view>.portal-summary .portal-stat{position:relative;min-width:0;padding:15px 17px;border:0;border-right:1px solid var(--line);border-radius:0;background:transparent}
+.portal-view#employee-view>.portal-summary .portal-stat:last-child{border-right:0}
+.portal-view#employee-view>.portal-summary .portal-stat span{display:block;margin-bottom:6px;font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+.portal-view#employee-view>.portal-summary .portal-stat strong{font-size:1.16rem;line-height:1.25}
+.portal-view#employee-view>.portal-summary .portal-stat:nth-child(2) strong{color:var(--red)}
+.portal-view#employee-view>.portal-summary .portal-stat:nth-child(3) strong{color:var(--blue)}
+.portal-view#employee-view>.portal-summary .portal-stat:nth-child(4) strong{font-size:1rem}
+.employee-task-alert{display:flex;align-items:center;gap:12px;margin:6px 0 14px;padding:12px 14px;border:1px solid color-mix(in srgb,var(--red) 45%,var(--line));border-left:4px solid var(--red);border-radius:6px;background:color-mix(in srgb,var(--red) 8%,var(--card));color:var(--ink)}
+.employee-task-alert[hidden]{display:none}
+.employee-alert-mark{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--red);color:#17211E;font:800 1rem var(--head);flex:none}
+.employee-alert-copy{display:grid;gap:2px;min-width:0;flex:1}
+.employee-alert-copy strong{font:700 .94rem var(--head)}
+.employee-alert-copy span{color:var(--muted);font-size:.82rem;line-height:1.4}
+.employee-notify-button{flex:none;padding:7px 10px;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--blue-deep);font:600 .78rem var(--body);cursor:pointer}
+.employee-notify-button:hover{border-color:var(--blue);background:var(--tint)}
+.task-new-badge{display:inline-block;margin-left:7px;padding:2px 6px;border-radius:3px;background:var(--red);color:#17211E;font:700 .66rem var(--body);letter-spacing:.04em;vertical-align:2px}
+.portal-record.task-new{border-left:3px solid var(--red)}
+.portal-employee-grid>div:first-child>.portal-panel:first-child{padding:21px;background:var(--blue-deep);border-color:var(--blue-deep);color:#F6F5EF}
+.portal-employee-grid>div:first-child>.portal-panel:first-child h3{color:#fff}
+.portal-employee-grid>div:first-child>.portal-panel:first-child .portal-note{color:#C4D1C7}
+.portal-clock{justify-content:space-between;margin:16px 0 11px;padding:14px;background:#ffffff0d;border:1px solid #ffffff24;border-radius:5px}
+.portal-clock strong{font-size:1.18rem;color:#fff}
+.portal-clock .btn{min-width:112px;min-height:42px;padding:9px 14px;border-radius:4px;background:var(--red);color:#17211E!important;font-weight:700}
+.portal-clock .btn:hover{background:#F28A65}
+.portal-clock .btn:disabled{background:#78827C;color:#fff!important}
+.portal-employee-grid>div:last-child>.portal-panel:first-child{border-top:3px solid var(--red)}
+.portal-employee-grid .portal-panel h3{display:flex;align-items:center;gap:9px}
+.portal-employee-grid .portal-record{padding:13px 14px;border-radius:5px}
+.portal-employee-grid .portal-record button{margin-top:9px;padding:7px 10px;border:1px solid var(--line);border-radius:4px;background:var(--tint);color:var(--blue-deep);font:600 .82rem var(--body);cursor:pointer}
+.portal-employee-grid .portal-record button:hover{border-color:var(--blue);background:color-mix(in srgb,var(--tint) 60%,var(--bg))}
+.portal-employee-grid #report-form{gap:13px}
+.portal-employee-grid #report-form textarea{min-height:90px}
+.portal-employee-grid #report-form input[type="file"]{padding:8px;background:var(--bg);font-size:.84rem}
+.portal-employee-grid #report-form .portal-note{line-height:1.45}
+.portal-employee-grid #report-form button[type="submit"]{min-height:42px;padding:10px 15px}
 .portal-profile{margin:0 0 5px;font:700 1.3rem var(--head)}
 .portal-clock{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0}
 .portal-clock strong{font:700 1.4rem var(--head)}
@@ -156,7 +276,11 @@ footer b{color:#fff}
 .portal-media img,.portal-media video{width:min(100%,220px);max-height:180px;object-fit:contain;background:#101820;border-radius:5px}
 .portal-media a{color:var(--blue);font-size:.86rem}
 .portal-status{display:inline-block;padding:3px 8px;border-radius:4px;background:var(--tint);font-size:.8rem}
-@media(max-width:760px){.portal-columns,.portal-employee-grid{grid-template-columns:1fr}.portal-summary{grid-template-columns:1fr 1fr}.portal-session{align-items:flex-start}}
+@media(max-width:760px){.portal-columns,.portal-employee-grid{grid-template-columns:1fr}.portal-summary{grid-template-columns:1fr 1fr}.portal-view#employee-view>.portal-summary{grid-template-columns:1fr 1fr}.portal-view#employee-view>.portal-summary .portal-stat:nth-child(2){border-right:0}.portal-view#employee-view>.portal-summary .portal-stat:nth-child(-n+2){border-bottom:1px solid var(--line)}.portal-view#employee-view>.portal-summary .portal-stat:nth-child(3){border-right:1px solid var(--line)}.portal-session{align-items:flex-start;margin-left:0;margin-right:0}.portal-session>div:first-child{grid-template-columns:minmax(0,1fr)}.portal-session details{grid-column:1}.portal-nav{margin-bottom:16px}.portal-nav button{padding:9px 11px}.employee-clock-panel{grid-template-columns:1fr;gap:6px}.employee-clock-panel .portal-clock{grid-column:1;grid-row:auto;min-width:0;margin-top:8px}.employee-clock-panel .portal-note{grid-column:1}}
+@media(max-width:600px){.portal-report-heading{align-items:stretch;flex-direction:column}.portal-report-filters{display:grid;grid-template-columns:1fr 1fr 36px}.portal-report-filters select,.portal-report-filters input{width:100%}}
+@media(max-width:520px){.employee-task-alert{align-items:flex-start;flex-wrap:wrap}.employee-alert-copy{flex-basis:calc(100% - 42px)}.employee-notify-button{margin-left:40px}}
+@media(max-width:600px){.portal-dialog:has(#login-view:not([hidden])){width:calc(100% - 20px)}.portal-dialog:has(#login-view:not([hidden])) .portal-shell{padding:14px}.portal-login{grid-template-columns:1fr;min-height:0}.portal-login-side{min-height:126px;padding:16px 18px;display:grid;grid-template-columns:auto 1fr;grid-template-rows:auto 1fr;column-gap:14px;align-items:center}.portal-login-kicker{grid-column:1/-1}.portal-login-symbol{grid-column:1;grid-row:2;width:48px;height:48px;margin:8px 0 0;border-width:1.5px}.portal-login-symbol::before{inset:7px;border-width:1.5px}.portal-login-symbol i{width:8px;height:8px}.portal-login-brand{grid-column:2;grid-row:2;font-size:1.15rem}.portal-login-label{position:absolute;right:18px;bottom:17px;margin:0;font-size:.58rem}.portal-login-content{max-width:none;padding:23px 20px 18px}.portal-login-content h3{font-size:1.7rem}.portal-login-content #setup-view h3{font-size:1.5rem}.portal-login-content .portal-form{margin-top:18px}}
+@media(max-width:520px){.portal-table-filters{display:grid;grid-template-columns:1fr 1fr;align-items:end}.portal-table-filters label:first-child:nth-last-child(3){grid-column:1/-1}.portal-table-filters label{min-width:0}.portal-table-filters .portal-filter-clear{justify-self:end}}
 @media(max-width:420px){.portal-summary{grid-template-columns:1fr 1fr}.portal-shell{padding:14px}.portal-table th,.portal-table td{padding:8px 6px;font-size:.82rem}.portal-nav button{padding:9px 10px}}
 /* landing-page support chat */
 .chat-widget{position:fixed;right:22px;bottom:22px;z-index:20;font-family:var(--body)}
@@ -196,7 +320,7 @@ footer b{color:#fff}
 <header>
   <div class="wrap nav">
     <a class="brand" href="#top" aria-label="Infinite Surveillance and Medical Solutions Co., home">
-      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="#0B4BA8" stroke-width="3"/><circle cx="20" cy="20" r="9" fill="none" stroke="#0B4BA8" stroke-width="3"/><circle cx="20" cy="20" r="3.5" fill="#E8262B"/></svg>
+      <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="none" stroke="var(--blue)" stroke-width="3"/><circle cx="20" cy="20" r="9" fill="none" stroke="var(--blue)" stroke-width="3"/><circle cx="20" cy="20" r="3.5" fill="var(--red)"/></svg>
       <span>Infinite</span>
     </a>
     <nav class="links" aria-label="Main">
@@ -211,19 +335,12 @@ footer b{color:#fff}
 <div class="hero">
   <div class="wrap">
     <div>
+      <span class="hero-kicker">Security systems · Mandaluyong &amp; beyond</span>
       <h1>Security that’s installed right and looked after for good.</h1>
       <p class="lead">Infinite Surveillance and Medical Solutions Co. supplies, installs and maintains CCTV and security systems for homes, businesses and local government in Mandaluyong and beyond.</p>
       <div class="cta"><a class="btn" href="#contact">Request a free site visit</a><a class="btn ghost" href="#services">See what we do</a></div>
     </div>
-    <svg class="lens" viewBox="0 0 300 300" role="img" aria-label="Camera lens illustration">
-      <circle cx="150" cy="150" r="140" fill="var(--tint)" stroke="var(--blue)" stroke-width="10"/>
-      <circle cx="150" cy="150" r="100" fill="none" stroke="var(--blue)" stroke-width="10" opacity=".55"/>
-      <circle cx="150" cy="150" r="60" fill="var(--blue)"/>
-      <circle cx="150" cy="150" r="28" fill="var(--blue-deep)"/>
-      <circle cx="132" cy="132" r="9" fill="#fff" opacity=".8"/>
-      <circle class="rec" cx="250" cy="52" r="12" fill="var(--red)"/>
-      <rect x="140" y="268" width="20" height="8" rx="4" fill="var(--red)" opacity="0"/>
-    </svg>
+    <div class="hero-visual"><img class="hero-photo" src="assets/cctv-installation.jpg" alt="Rows of security cameras installed to monitor a facility"><span class="hero-live">On-site protection</span><div class="hero-caption"><div><strong>Designed for your site.</strong><span>Installed, tested, supported.</span></div><span class="hero-index">ISMS / 01</span></div></div>
   </div>
 </div>
 
@@ -364,36 +481,67 @@ footer b{color:#fff}
       <div><h2 id="portal-title">Staff portal</h2><p>Infinite Surveillance team workspace</p></div>
       <button class="portal-close" type="button" aria-label="Close staff portal">&times;</button>
     </div>
-    <p class="portal-warning"><strong>Prototype only:</strong> Sign-in and records are stored in this browser and are not secure or shared with another device. Use fictional information only. Employee photos and videos are previewed for this session and are not uploaded to a server.</p>
     <section class="portal-view portal-login" id="login-view">
-      <h3>Sign in to your workspace</h3>
-      <p class="portal-note">Use one of the fictional demo accounts below to preview the portal.</p>
-      <form class="portal-form" id="login-form">
-        <label>Work email<input name="email" type="email" autocomplete="username" required></label>
-        <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
-        <button class="btn" type="submit">Sign in</button>
-        <p class="portal-note" id="login-status" role="status"></p>
-      </form>
-      <div class="portal-demo-accounts"><p><strong>Admin demo:</strong> admin@infinite-demo.test / Admin123!</p><p><strong>Employee demo:</strong> alex.rivera@example.test / Staff123!</p><p>New demo staff use Staff123! in this prototype.</p></div>
+      <div class="portal-login-side">
+        <span class="portal-login-kicker">INFINITE / TEAM SYSTEMS</span>
+        <span class="portal-login-symbol" aria-hidden="true"><i></i></span>
+        <div class="portal-login-brand">Infinite<br>Surveillance</div>
+        <span class="portal-login-label">STAFF ACCESS</span>
+      </div>
+      <div class="portal-login-content">
+        <div id="login-standard">
+          <span class="portal-form-kicker">TEAM WORKSPACE</span>
+          <h3>Sign in</h3>
+          <p class="portal-note">Use your company portal account.</p>
+        </div>
+        <div id="setup-view" hidden>
+          <span class="portal-form-kicker">INITIAL CONFIGURATION</span>
+          <h3>Administrator setup</h3>
+          <p class="portal-note">Create the first admin account for this server. Choose a unique password.</p>
+          <form class="portal-form" id="setup-form">
+            <label>Administrator name<input name="name" required maxlength="80" autocomplete="name"></label>
+            <label>Work email<input name="email" type="email" required maxlength="120" autocomplete="email"></label>
+            <label>Password<input name="password" type="password" required minlength="12" autocomplete="new-password"></label>
+            <button class="btn" type="submit">Create admin account</button>
+            <p class="portal-note" id="setup-status" role="status"></p>
+          </form>
+        </div>
+        <form class="portal-form" id="login-form">
+          <label>Work email<input name="email" type="email" placeholder="name@company.com" autocomplete="username" required></label>
+          <label>Password<input name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required></label>
+          <button class="btn" type="submit">Sign in <span aria-hidden="true">&rarr;</span></button>
+          <p class="portal-note" id="login-status" role="status"></p>
+        </form>
+        <p class="portal-warning"><span class="portal-warning-mark" aria-hidden="true">i</span><span><strong>Staff records</strong><br>Stored by this server and available to authorized staff.</span></p>
+      </div>
     </section>
     <section class="portal-view" id="app-view" hidden>
-      <div class="portal-session"><div><span class="portal-user" id="session-name"></span><p class="portal-note" id="session-role"></p></div><button class="btn ghost" id="logout-button" type="button">Sign out</button></div>
+      <div class="portal-session"><div><span class="portal-user" id="session-name"></span><p class="portal-note" id="session-role"></p><details><summary class="portal-note">Change password</summary><form class="portal-form" id="password-form"><label>Current password<input name="currentPassword" type="password" required autocomplete="current-password"></label><label>New password<input name="newPassword" type="password" required minlength="12" autocomplete="new-password"></label><button class="btn" type="submit">Update password</button><p class="portal-note" id="password-status" role="status"></p></form></details></div><button class="btn ghost" id="logout-button" type="button">Sign out</button></div>
       <div class="portal-view" id="admin-view" hidden>
         <nav class="portal-nav" aria-label="Admin sections" role="tablist">
           <button type="button" role="tab" aria-selected="true" data-admin-tab="overview">Overview</button><button type="button" role="tab" aria-selected="false" data-admin-tab="attendance">Attendance</button><button type="button" role="tab" aria-selected="false" data-admin-tab="staff">Staff</button><button type="button" role="tab" aria-selected="false" data-admin-tab="payroll">Salary</button><button type="button" role="tab" aria-selected="false" data-admin-tab="expenses">Expenses</button><button type="button" role="tab" aria-selected="false" data-admin-tab="schedule">Schedule</button><button type="button" role="tab" aria-selected="false" data-admin-tab="tasks">Tasks</button><button type="button" role="tab" aria-selected="false" data-admin-tab="reports">Work reports</button>
         </nav>
         <section class="portal-section" data-admin-section="overview"><div class="portal-summary"><div class="portal-stat"><strong id="stat-staff">0</strong><span>Active staff</span></div><div class="portal-stat"><strong id="stat-clocked">0</strong><span>Clocked in today</span></div><div class="portal-stat"><strong id="stat-reports">0</strong><span>Work reports</span></div><div class="portal-stat"><strong id="stat-expenses">₱0</strong><span>Pending expenses</span></div></div><div class="portal-panel"><h3>Today’s team activity</h3><ul class="portal-record-list" id="admin-activity"></ul></div></section>
         <section class="portal-section" data-admin-section="attendance" hidden><div class="portal-panel"><h3>Employee attendance</h3><p class="portal-note" id="attendance-date"></p><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Employee</th><th>Status</th><th>Time in</th><th>Time out</th></tr></thead><tbody id="attendance-rows"></tbody></table></div></div></section>
-        <section class="portal-section" data-admin-section="staff" hidden><div class="portal-columns"><div class="portal-panel"><h3>Add employee</h3><form class="portal-form" id="staff-form"><label>Full name<input name="name" required maxlength="80"></label><label>Job title<input name="role" required maxlength="80"></label><label>Work email<input name="email" type="email" required maxlength="120" placeholder="name@example.test"></label><label>Monthly salary (₱)<input name="salary" type="number" min="0" step="0.01" required></label><button class="btn" type="submit">Add staff member</button><p class="portal-note" role="status" id="staff-status"></p></form></div><div class="portal-panel"><h3>Staff directory</h3><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Name</th><th>Role</th><th>Email</th><th>Monthly salary</th></tr></thead><tbody id="staff-rows"></tbody></table></div></div></div></section>
-        <section class="portal-section" data-admin-section="payroll" hidden><div class="portal-columns"><div class="portal-panel"><h3>Record salary payment</h3><form class="portal-form" id="payroll-form"><label>Employee<select name="staffId" data-staff-select required></select></label><label>Pay period<input name="period" type="month" required></label><label>Amount paid (₱)<input name="amount" type="number" min="0" step="0.01" required></label><label>Status<select name="status"><option>Pending</option><option>Paid</option></select></label><button class="btn" type="submit">Save payroll record</button></form></div><div class="portal-panel"><h3>Salary tracker</h3><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Employee</th><th>Period</th><th>Amount</th><th>Status</th></tr></thead><tbody id="payroll-rows"></tbody></table></div></div></div></section>
-        <section class="portal-section" data-admin-section="expenses" hidden><div class="portal-columns"><div class="portal-panel"><h3>Log expense</h3><form class="portal-form" id="expense-form"><label>Employee<select name="staffId" data-staff-select required></select></label><label>Category<input name="category" required maxlength="60" placeholder="Transport, materials"></label><label>Description<input name="description" required maxlength="160"></label><label>Amount (₱)<input name="amount" type="number" min="0" step="0.01" required></label><button class="btn" type="submit">Add expense</button></form></div><div class="portal-panel"><h3>Expense tracker</h3><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Employee</th><th>Expense</th><th>Amount</th><th>Status</th><th></th></tr></thead><tbody id="expense-rows"></tbody></table></div></div></div></section>
-        <section class="portal-section" data-admin-section="schedule" hidden><div class="portal-columns"><div class="portal-panel"><h3>Assign a schedule</h3><form class="portal-form" id="schedule-form"><label>Employee<select name="staffId" data-staff-select required></select></label><label>Date<input name="date" type="date" required></label><label>Start time<input name="start" type="time" required></label><label>End time<input name="end" type="time" required></label><label>Site or location<input name="site" required maxlength="120"></label><button class="btn" type="submit">Save schedule</button></form></div><div class="portal-panel"><h3>Team schedule</h3><ul class="portal-record-list" id="schedule-list"></ul></div></div></section>
-        <section class="portal-section" data-admin-section="tasks" hidden><div class="portal-columns"><div class="portal-panel"><h3>Assign a daily task</h3><form class="portal-form" id="task-form"><label>Employee<select name="staffId" data-staff-select required></select></label><label>Due date<input name="date" type="date" required></label><label>Task title<input name="title" required maxlength="120"></label><label>Instructions<textarea name="details" maxlength="500"></textarea></label><button class="btn" type="submit">Assign task</button></form></div><div class="portal-panel"><h3>Assigned tasks</h3><ul class="portal-record-list" id="admin-task-list"></ul></div></div></section>
-        <section class="portal-section" data-admin-section="reports" hidden><div class="portal-panel"><h3>Employee work reports</h3><ul class="portal-record-list" id="admin-report-list"></ul></div></section>
+        <section class="portal-section" data-admin-section="staff" hidden><div class="portal-columns"><div class="portal-panel"><h3>Add employee</h3><form class="portal-form" id="staff-form"><label>Full name<input name="name" required maxlength="80"></label><label>Job title<input name="role" required maxlength="80"></label><label>Work email<input name="email" type="email" required maxlength="120" placeholder="name@company.com"></label><label>Monthly salary (₱)<input name="salary" type="number" min="0" step="0.01" required></label><button class="btn" type="submit">Add staff member</button><p class="portal-note" role="status" id="staff-status"></p></form></div><div class="portal-panel"><h3>Staff directory</h3><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Name</th><th>Role</th><th>Email</th><th>Monthly salary</th></tr></thead><tbody id="staff-rows"></tbody></table></div></div></div></section>
+        <section class="portal-section" data-admin-section="payroll" hidden><div class="portal-columns"><div class="portal-panel"><h3>Record salary payment</h3><form class="portal-form" id="payroll-form"><label>Employee<select name="staffId" data-staff-select required></select></label><label>Pay period<input name="period" type="month" required></label><label>Amount paid (₱)<input name="amount" type="number" min="0" step="0.01" required></label><label>Status<select name="status"><option>Pending</option><option>Paid</option></select></label><button class="btn" type="submit">Save payroll record</button><p class="portal-note" id="payroll-status" role="status"></p></form></div><div class="portal-panel"><h3>Salary tracker</h3><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Employee</th><th>Period</th><th>Amount</th><th>Status</th></tr></thead><tbody id="payroll-rows"></tbody></table></div></div></div></section>
+        <section class="portal-section" data-admin-section="expenses" hidden><div class="portal-columns"><div class="portal-panel"><h3>Log expense</h3><form class="portal-form" id="expense-form"><label>Employee<select name="staffId" data-staff-select required></select></label><label>Category<input name="category" required maxlength="60" placeholder="Transport, materials"></label><label>Description<input name="description" required maxlength="160"></label><label>Amount (₱)<input name="amount" type="number" min="0" step="0.01" required></label><button class="btn" type="submit">Add expense</button><p class="portal-note" id="expense-status" role="status"></p></form></div><div class="portal-panel"><h3>Expense tracker</h3><div class="portal-table-wrap"><table class="portal-table"><thead><tr><th>Employee</th><th>Expense</th><th>Amount</th><th>Status</th><th></th></tr></thead><tbody id="expense-rows"></tbody></table></div></div></div></section>
+        <section class="portal-section" data-admin-section="schedule" hidden><div class="portal-columns"><div class="portal-panel"><h3>Assign a schedule</h3><form class="portal-form" id="schedule-form"><label>Employee<select name="staffId" data-staff-select required></select></label><label>Date<input name="date" type="date" required></label><label>Start time<input name="start" type="time" required></label><label>End time<input name="end" type="time" required></label><label>Site or location<input name="site" required maxlength="120"></label><button class="btn" type="submit">Save schedule</button><p class="portal-note" id="schedule-status" role="status"></p></form></div><div class="portal-panel"><h3>Team schedule</h3><ul class="portal-record-list" id="schedule-list"></ul></div></div></section>
+        <section class="portal-section" data-admin-section="tasks" hidden><div class="portal-columns"><div class="portal-panel"><h3>Assign a daily task</h3><form class="portal-form" id="task-form"><label>Employee<select name="staffId" data-staff-select required></select></label><label>Due date<input name="date" type="date" required></label><label>Task title<input name="title" required maxlength="120"></label><label>Instructions<textarea name="details" maxlength="500"></textarea></label><button class="btn" type="submit">Assign task</button><p class="portal-note" id="task-status" role="status"></p></form></div><div class="portal-panel"><h3>Assigned tasks</h3><ul class="portal-record-list" id="admin-task-list"></ul></div></div></section>
+        <section class="portal-section" data-admin-section="reports" hidden><div class="portal-panel"><div class="portal-report-heading"><div><h3>Employee work reports</h3><p class="portal-note">Filter by work date or sort to find a report.</p></div><div class="portal-report-filters"><label>Order<select id="admin-report-order"><option value="latest">Latest first</option><option value="oldest">Oldest first</option></select></label><label>Month<input id="admin-report-month" type="month"></label><button class="portal-filter-clear" id="admin-report-clear" type="button" aria-label="Clear report month filter" title="Clear month filter">&times;</button></div></div><ul class="portal-record-list" id="admin-report-list"></ul></div></section>
       </div>
       <div class="portal-view" id="employee-view" hidden>
+        <div class="employee-task-alert" id="employee-task-alert" role="status" aria-live="polite" hidden><span class="employee-alert-mark" aria-hidden="true">!</span><div class="employee-alert-copy"><strong id="employee-alert-title">New task assigned</strong><span id="employee-alert-message"></span></div><button class="employee-notify-button" id="enable-task-notifications" type="button" hidden>Enable notifications</button></div>
         <div class="portal-summary"><div class="portal-stat"><strong id="employee-today"></strong><span>Today</span></div><div class="portal-stat"><strong id="employee-task-count">0</strong><span>Open tasks</span></div><div class="portal-stat"><strong id="employee-hours">Not clocked in</strong><span>Time record</span></div><div class="portal-stat"><strong id="employee-next-shift">No shift</strong><span>Next schedule</span></div></div>
-        <div class="portal-employee-grid"><div><div class="portal-panel"><h3>Time in / time out</h3><div class="portal-clock"><strong id="clock-time"></strong><button class="btn" id="clock-button" type="button">Time in</button></div><p class="portal-note" id="clock-status" role="status">Your time record is visible to the admin.</p></div><div class="portal-panel"><h3>My daily tasks</h3><ul class="portal-record-list" id="employee-task-list"></ul></div><div class="portal-panel"><h3>My schedule</h3><ul class="portal-record-list" id="employee-schedule-list"></ul></div></div><div><div class="portal-panel"><h3>Send a work report</h3><form class="portal-form" id="report-form"><label>Work date<input name="date" type="date" required></label><label>Site / job<input name="site" maxlength="120" required></label><label>Task worked on<input name="task" maxlength="160" required></label><label>What happened? Describe the work completed<textarea name="work" maxlength="1200" required></textarea></label><label>Issues, next steps, or what will happen next<textarea name="next" maxlength="800" required></textarea></label><label>Photos or videos<input name="media" type="file" accept="image/*,video/*" multiple></label><p class="portal-note">Attach images or videos from this device. Keep each file under 50 MB. In this prototype, attachments are not uploaded and disappear when this page is closed.</p><button class="btn" type="submit">Send report to admin</button><p class="portal-note" id="report-status" role="status"></p></form></div><div class="portal-panel"><h3>My submitted reports</h3><ul class="portal-record-list" id="employee-report-list"></ul></div></div></div>
+        <div class="portal-panel employee-clock-panel"><h3>Time in / time out</h3><div class="portal-clock"><strong id="clock-time"></strong><button class="btn" id="clock-button" type="button">Time in</button></div><p class="portal-note" id="clock-status" role="status">Your time record is visible to the admin.</p></div>
+        <nav class="portal-nav employee-nav" aria-label="Employee sections" role="tablist">
+          <button type="button" role="tab" aria-selected="true" aria-controls="employee-tasks-section" data-employee-tab="tasks">My daily tasks <span class="employee-tab-count" id="employee-task-tab-count">0</span></button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="employee-schedule-section" data-employee-tab="schedule">My schedule</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="employee-reports-section" data-employee-tab="reports">Work reports</button>
+        </nav>
+        <section class="employee-section" id="employee-tasks-section" role="tabpanel" aria-label="My daily tasks"><div class="portal-panel"><h3>My daily tasks</h3><ul class="portal-record-list" id="employee-task-list"></ul></div></section>
+        <section class="employee-section" id="employee-schedule-section" role="tabpanel" aria-label="My schedule" hidden><div class="portal-panel"><h3>My schedule</h3><ul class="portal-record-list" id="employee-schedule-list"></ul></div></section>
+        <section class="employee-section" id="employee-reports-section" role="tabpanel" aria-label="Work reports" hidden><div class="portal-employee-grid"><div class="portal-panel"><h3>Send a work report</h3><form class="portal-form" id="report-form"><label>Work date<input name="date" type="date" required></label><label>Site / job<input name="site" maxlength="120" required></label><label>Task worked on<input name="task" maxlength="160" required></label><label>What happened? Describe the work completed<textarea name="work" maxlength="1200" required></textarea></label><label>Issues, next steps, or what will happen next<textarea name="next" maxlength="800" required></textarea></label><label>Photos or videos<input name="media" type="file" accept="image/*,video/*" multiple></label><p class="portal-note">Photos and videos are uploaded to the company server and attached to your report.</p><button class="btn" type="submit">Send report to admin</button><p class="portal-note" id="report-status" role="status"></p></form></div><div class="portal-panel"><div class="portal-report-heading"><div><h3>My submitted reports</h3><p class="portal-note">Review your sent work reports.</p></div><div class="portal-report-filters"><label>Order<select id="employee-report-order"><option value="latest">Latest first</option><option value="oldest">Oldest first</option></select></label><label>Month<input id="employee-report-month" type="month"></label><button class="portal-filter-clear" id="employee-report-clear" type="button" aria-label="Clear report month filter" title="Clear month filter">&times;</button></div></div><ul class="portal-record-list" id="employee-report-list"></ul></div></div></section>
       </div>
     </section>
   </div>
@@ -401,18 +549,13 @@ footer b{color:#fff}
 
 <script>
 var portal=document.getElementById('staff-portal');
-var storageKey='infinite-surveillance-workspace-demo-v2';
 function todayKey(){var now=new Date();return now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');}
-var portalData={staff:[
-  {id:'demo-1',name:'Alex Rivera',role:'Field Technician',email:'alex.rivera@example.test',salary:28000},
-  {id:'demo-2',name:'Jamie Santos',role:'Service Coordinator',email:'jamie.santos@example.test',salary:32000},
-  {id:'demo-3',name:'Morgan Lee',role:'Systems Installer',email:'morgan.lee@example.test',salary:30000}
-],payroll:[],expenses:[{id:'expense-demo',staffId:'demo-1',category:'Transport',description:'Demo site visit fare',amount:350,status:'Pending',createdAt:new Date().toLocaleDateString()}],schedules:[],tasks:[{id:'task-demo',staffId:'demo-1',date:todayKey(),title:'Inspect demo CCTV installation',details:'Check camera views and document any issues.',completed:false}],reports:[],timeEntries:[]};
-try{var savedData=JSON.parse(localStorage.getItem(storageKey)||'null');if(savedData){Object.keys(portalData).forEach(function(key){if(Array.isArray(savedData[key]))portalData[key]=savedData[key];});}}catch(error){}
+var portalData={staff:[],payroll:[],expenses:[],schedules:[],tasks:[],reports:[],timeEntries:[]};
 var currentUser=null;
 var reportMedia={};
+var knownEmployeeTaskIds=null;
+var newEmployeeTaskIds=new Set();
 var moneyFormat=new Intl.NumberFormat('en-PH',{style:'currency',currency:'PHP',maximumFractionDigits:2});
-function savePortalData(){try{localStorage.setItem(storageKey,JSON.stringify(portalData));return true;}catch(error){return false;}}
 function personById(id){return portalData.staff.find(function(person){return person.id===id;});}
 function personName(id){var person=personById(id);return person?person.name:'Former staff';}
 function addTextCell(row,text){var cell=document.createElement('td');cell.textContent=text;row.appendChild(cell);return cell;}
@@ -420,19 +563,28 @@ function setEmpty(list,message){list.replaceChildren();var item=document.createE
 function appendMedia(container,reportId){(reportMedia[reportId]||[]).forEach(function(media){var element=document.createElement(media.type.indexOf('video/')===0?'video':'img');element.src=media.url;if(element.tagName==='VIDEO')element.controls=true;else element.alt=media.name;container.appendChild(element);});}
 function recordItem(title,lines,meta){var item=document.createElement('li');item.className='portal-record';var heading=document.createElement('h4');heading.textContent=title;item.appendChild(heading);lines.forEach(function(line){var p=document.createElement('p');p.textContent=line;item.appendChild(p);});if(meta){var small=document.createElement('small');small.textContent=meta;item.appendChild(small);}return item;}
 function fillStaffSelects(){document.querySelectorAll('[data-staff-select]').forEach(function(select){var previous=select.value;select.replaceChildren();portalData.staff.forEach(function(person){var option=document.createElement('option');option.value=person.id;option.textContent=person.name;select.appendChild(option);});if(portalData.staff.some(function(person){return person.id===previous;}))select.value=previous;select.disabled=portalData.staff.length===0;});}
+function addTableFilter(panel,specs){var wrapper=document.createElement('div');wrapper.className='portal-table-filters';specs.forEach(function(spec){var label=document.createElement('label');label.textContent=spec.label;var input=document.createElement(spec.options?'select':'input');input.id=spec.id;if(spec.options){spec.options.forEach(function(entry){var option=document.createElement('option');option.value=entry.value;option.textContent=entry.label;input.appendChild(option);});}else{input.type=spec.type||'search';input.placeholder=spec.placeholder||'';}if(spec.value)input.value=spec.value;label.appendChild(input);wrapper.appendChild(label);input.addEventListener(spec.type==='search'?'input':'change',spec.onChange);});var clear=document.createElement('button');clear.type='button';clear.className='portal-filter-clear';clear.textContent='×';clear.title='Clear filters';clear.setAttribute('aria-label','Clear filters');clear.addEventListener('click',function(){specs.forEach(function(spec){var input=document.getElementById(spec.id);input.value=spec.resetValue||'';});specs[0].onChange();});wrapper.appendChild(clear);var table=panel.querySelector('.portal-table-wrap');if(table)panel.insertBefore(wrapper,table);return wrapper;}
+function setupAdminTableFilters(){
+  var staffPanel=document.querySelector('[data-admin-section="staff"] .portal-columns>.portal-panel:last-child');
+  var payrollPanel=document.querySelector('[data-admin-section="payroll"] .portal-columns>.portal-panel:last-child');
+  var expensePanel=document.querySelector('[data-admin-section="expenses"] .portal-columns>.portal-panel:last-child');
+  var attendancePanel=document.querySelector('[data-admin-section="attendance"] .portal-panel');
+  if(staffPanel)addTableFilter(staffPanel,[{id:'staff-search',label:'Search staff',placeholder:'Name, role, or email',type:'search',onChange:renderStaffTable}]);
+  if(payrollPanel)addTableFilter(payrollPanel,[{id:'payroll-month-filter',label:'Pay period',type:'month',onChange:renderPayrollTable},{id:'payroll-status-filter',label:'Status',options:[{value:'',label:'All statuses'},{value:'Paid',label:'Paid'},{value:'Pending',label:'Pending'}],onChange:renderPayrollTable}]);
+  if(expensePanel)addTableFilter(expensePanel,[{id:'expense-month-filter',label:'Month',type:'month',onChange:renderExpenses},{id:'expense-status-filter',label:'Status',options:[{value:'',label:'All statuses'},{value:'Pending',label:'Pending'},{value:'Paid',label:'Paid'}],onChange:renderExpenses}]);
+  if(attendancePanel)addTableFilter(attendancePanel,[{id:'attendance-date-filter',label:'Attendance date',type:'date',value:todayKey(),resetValue:todayKey(),onChange:renderAttendance}]);
+}
+function renderStaffTable(){var rows=document.getElementById('staff-rows');rows.replaceChildren();var query=(document.getElementById('staff-search')?.value||'').trim().toLowerCase();var staff=portalData.staff.filter(function(person){return !query||[person.name,person.roleTitle,person.role,person.email].some(function(value){return String(value||'').toLowerCase().includes(query);});});staff.forEach(function(person){var row=document.createElement('tr');addTextCell(row,person.name);addTextCell(row,person.roleTitle||person.role);addTextCell(row,person.email);addTextCell(row,moneyFormat.format(Number(person.salary)||0));rows.appendChild(row);});if(!rows.children.length){var empty=document.createElement('tr');var cell=addTextCell(empty,portalData.staff.length?'No staff match this search.':'No staff members yet.');cell.colSpan=4;cell.className='portal-empty';rows.appendChild(empty);}}
+function renderPayrollTable(){var rows=document.getElementById('payroll-rows');rows.replaceChildren();var month=document.getElementById('payroll-month-filter')?.value||'';var status=document.getElementById('payroll-status-filter')?.value||'';var records=portalData.payroll.filter(function(record){return(!month||String(record.period||'').slice(0,7)===month)&&(!status||record.status===status);});records.forEach(function(record){var row=document.createElement('tr');addTextCell(row,personName(record.staffId));addTextCell(row,record.period);addTextCell(row,moneyFormat.format(Number(record.amount)||0));addTextCell(row,record.status);rows.appendChild(row);});if(!rows.children.length){var empty=document.createElement('tr');var cell=addTextCell(empty,portalData.payroll.length?'No salary records match these filters.':'No payroll records yet.');cell.colSpan=4;cell.className='portal-empty';rows.appendChild(empty);}}
 function renderPortal(){
   fillStaffSelects();
-  var rows=document.getElementById('staff-rows');rows.replaceChildren();
-  portalData.staff.forEach(function(person){var row=document.createElement('tr');addTextCell(row,person.name);addTextCell(row,person.role);addTextCell(row,person.email);addTextCell(row,moneyFormat.format(Number(person.salary)||0));rows.appendChild(row);});
-  if(!rows.children.length){var empty=document.createElement('tr');var cell=addTextCell(empty,'No staff members yet.');cell.colSpan=4;cell.className='portal-empty';rows.appendChild(empty);}
-  var payrollRows=document.getElementById('payroll-rows');payrollRows.replaceChildren();portalData.payroll.slice().reverse().forEach(function(record){var row=document.createElement('tr');addTextCell(row,personName(record.staffId));addTextCell(row,record.period);addTextCell(row,moneyFormat.format(Number(record.amount)||0));addTextCell(row,record.status);payrollRows.appendChild(row);});
-  if(!payrollRows.children.length){var payrollEmpty=document.createElement('tr');var payrollCell=addTextCell(payrollEmpty,'No payroll records yet.');payrollCell.colSpan=4;payrollCell.className='portal-empty';payrollRows.appendChild(payrollEmpty);}
-  renderExpenses();renderSchedules();renderTasks();renderReports();renderEmployee();renderOverview();renderAttendance();
+  renderStaffTable();renderPayrollTable();renderExpenses();renderSchedules();renderTasks();renderReports();renderEmployee();renderOverview();renderAttendance();
 }
 function renderExpenses(){
   var rows=document.getElementById('expense-rows');rows.replaceChildren();
-  portalData.expenses.slice().reverse().forEach(function(expense){var row=document.createElement('tr');addTextCell(row,personName(expense.staffId));addTextCell(row,expense.category+': '+expense.description);addTextCell(row,moneyFormat.format(Number(expense.amount)||0));addTextCell(row,expense.status);var action=addTextCell(row,'');if(expense.status==='Pending'){var button=document.createElement('button');button.type='button';button.textContent='Mark paid';button.dataset.paidExpense=expense.id;action.appendChild(button);}rows.appendChild(row);});
-  if(!rows.children.length){var empty=document.createElement('tr');var cell=addTextCell(empty,'No expenses recorded.');cell.colSpan=5;cell.className='portal-empty';rows.appendChild(empty);}
+  var month=document.getElementById('expense-month-filter')?.value||'';var status=document.getElementById('expense-status-filter')?.value||'';var expenses=portalData.expenses.filter(function(expense){return(!month||String(expense.createdAt||'').slice(0,7)===month)&&(!status||expense.status===status);});
+  expenses.forEach(function(expense){var row=document.createElement('tr');addTextCell(row,personName(expense.staffId));addTextCell(row,expense.category+': '+expense.description);addTextCell(row,moneyFormat.format(Number(expense.amount)||0));addTextCell(row,expense.status);var action=addTextCell(row,'');if(expense.status==='Pending'){var button=document.createElement('button');button.type='button';button.textContent='Mark paid';button.dataset.paidExpense=expense.id;action.appendChild(button);}rows.appendChild(row);});
+  if(!rows.children.length){var empty=document.createElement('tr');var cell=addTextCell(empty,portalData.expenses.length?'No expenses match these filters.':'No expenses recorded.');cell.colSpan=5;cell.className='portal-empty';rows.appendChild(empty);}
 }
 function renderSchedules(){
   var adminList=document.getElementById('schedule-list');adminList.replaceChildren();portalData.schedules.slice().sort(function(a,b){return a.date.localeCompare(b.date);}).forEach(function(schedule){adminList.appendChild(recordItem(personName(schedule.staffId),[schedule.date+' · '+schedule.start+'–'+schedule.end,'Location: '+schedule.site]));});if(!adminList.children.length)setEmpty(adminList,'No schedules assigned.');
@@ -440,31 +592,27 @@ function renderSchedules(){
 }
 function renderTasks(){
   var adminList=document.getElementById('admin-task-list');adminList.replaceChildren();portalData.tasks.slice().sort(function(a,b){return a.date.localeCompare(b.date);}).forEach(function(task){adminList.appendChild(recordItem(task.title,[personName(task.staffId)+' · Due '+task.date,task.details||'No additional instructions.',task.completed?'Completed':'Open']));});if(!adminList.children.length)setEmpty(adminList,'No tasks assigned.');
-  if(!currentUser||currentUser.role!=='employee')return;var mine=document.getElementById('employee-task-list');mine.replaceChildren();var employeeTasks=portalData.tasks.filter(function(task){return task.staffId===currentUser.id;}).sort(function(a,b){return a.date.localeCompare(b.date);});employeeTasks.forEach(function(task){var item=recordItem(task.title,[task.date+' · '+(task.details||'No additional instructions.'),task.completed?'Completed':'Open']);if(!task.completed){var button=document.createElement('button');button.type='button';button.textContent='Mark complete';button.dataset.completeTask=task.id;item.appendChild(button);}mine.appendChild(item);});if(!mine.children.length)setEmpty(mine,'No tasks assigned yet.');document.getElementById('employee-task-count').textContent=employeeTasks.filter(function(task){return !task.completed;}).length;
+  if(!currentUser||currentUser.role!=='employee')return;var mine=document.getElementById('employee-task-list');mine.replaceChildren();var employeeTasks=portalData.tasks.filter(function(task){return task.staffId===currentUser.id;}).sort(function(a,b){return a.date.localeCompare(b.date);});employeeTasks.forEach(function(task){var item=recordItem(task.title,[task.date+' · '+(task.details||'No additional instructions.'),task.completed?'Completed':'Open']);if(!task.completed&&newEmployeeTaskIds.has(task.id)){item.classList.add('task-new');var badge=document.createElement('span');badge.className='task-new-badge';badge.textContent='NEW';item.querySelector('h4').appendChild(badge);}if(!task.completed){var button=document.createElement('button');button.type='button';button.textContent='Mark complete';button.dataset.completeTask=task.id;item.appendChild(button);}mine.appendChild(item);});if(!mine.children.length)setEmpty(mine,'No tasks assigned yet.');var openCount=employeeTasks.filter(function(task){return !task.completed;}).length;document.getElementById('employee-task-count').textContent=openCount;document.getElementById('employee-task-tab-count').textContent=openCount;renderEmployeeTaskAlert(employeeTasks,openCount);
 }
+function renderEmployeeTaskAlert(employeeTasks,openCount){var alertBox=document.getElementById('employee-task-alert');if(!currentUser||currentUser.role!=='employee'||openCount===0){alertBox.hidden=true;return;}var newCount=employeeTasks.filter(function(task){return !task.completed&&newEmployeeTaskIds.has(task.id);}).length;document.getElementById('employee-alert-title').textContent=newCount?newCount+' new task'+(newCount===1?'':'s')+' assigned':openCount+' task'+(openCount===1?'':'s')+' waiting for you';document.getElementById('employee-alert-message').textContent=newCount?'Review the highlighted assignment'+(newCount===1?'':'s')+' in My daily tasks.':'Open My daily tasks to review your assignments.';var enableButton=document.getElementById('enable-task-notifications');enableButton.hidden=!(newCount&&'Notification'in window&&Notification.permission==='default');alertBox.hidden=false;}
+function notifyEmployeeTasks(tasks,user){if(!user||user.role!=='employee')return;var assigned=tasks.filter(function(task){return task.staffId===user.id;});if(knownEmployeeTaskIds===null){knownEmployeeTaskIds=new Set(assigned.map(function(task){return task.id;}));return;}var fresh=assigned.filter(function(task){return !knownEmployeeTaskIds.has(task.id);});assigned.forEach(function(task){knownEmployeeTaskIds.add(task.id);});fresh.forEach(function(task){if(task.completed)return;newEmployeeTaskIds.add(task.id);showEmployeeTaskToast(task);});}
+function showEmployeeTaskToast(task){var message='Due '+task.date+(task.details?' · '+task.details:'');var box=document.getElementById('employee-task-alert');box.hidden=false;document.getElementById('employee-alert-title').textContent='New task assigned: '+task.title;document.getElementById('employee-alert-message').textContent=message;var enableButton=document.getElementById('enable-task-notifications');enableButton.hidden=!('Notification'in window&&Notification.permission==='default');if('Notification'in window&&Notification.permission==='granted'){try{new Notification('New task assigned',{body:task.title+' · '+message,tag:'employee-task-'+task.id});}catch(error){}}}
+document.getElementById('enable-task-notifications').addEventListener('click',async function(){if(!('Notification'in window)){this.hidden=true;return;}try{var permission=await Notification.requestPermission();this.hidden=permission!=='default';}catch(error){this.hidden=true;}});
 function addReportToList(list,report){var item=recordItem(report.task+' · '+personName(report.staffId),['Site: '+report.site,'Work completed: '+report.work,'Next steps / what will happen: '+report.next,report.files&&report.files.length?'Attachments: '+report.files.map(function(file){return file.name;}).join(', '):'No attachments'],report.date+' · '+report.sentAt);var media=document.createElement('div');media.className='portal-media';appendMedia(media,report.id);if(media.children.length)item.appendChild(media);else if(report.files&&report.files.length){var note=document.createElement('small');note.textContent='File previews are available only during the session in which they were selected.';item.appendChild(note);}list.appendChild(item);}
-function renderReports(){var adminList=document.getElementById('admin-report-list');adminList.replaceChildren();portalData.reports.slice().reverse().forEach(function(report){addReportToList(adminList,report);});if(!adminList.children.length)setEmpty(adminList,'No employee reports received yet.');if(currentUser&&currentUser.role==='employee'){var mine=document.getElementById('employee-report-list');mine.replaceChildren();portalData.reports.filter(function(report){return report.staffId===currentUser.id;}).slice().reverse().forEach(function(report){addReportToList(mine,report);});if(!mine.children.length)setEmpty(mine,'You have not sent a report yet.');}}
+function renderReportList(listId,records,orderId,monthId,emptyMessage){var list=document.getElementById(listId);var order=document.getElementById(orderId).value;var month=document.getElementById(monthId).value;var filtered=records.filter(function(report){return !month||String(report.date||'').slice(0,7)===month;});filtered.sort(function(left,right){var leftDate=(left.date||'')+' '+(left.sentAt||'');var rightDate=(right.date||'')+' '+(right.sentAt||'');return order==='oldest'?leftDate.localeCompare(rightDate):rightDate.localeCompare(leftDate);});list.replaceChildren();filtered.forEach(function(report){addReportToList(list,report);});if(!filtered.length)setEmpty(list,records.length?'No reports match this month.':emptyMessage);}
+function renderReports(){renderReportList('admin-report-list',portalData.reports,'admin-report-order','admin-report-month','No employee reports received yet.');if(currentUser&&currentUser.role==='employee'){var mine=portalData.reports.filter(function(report){return report.staffId===currentUser.id;});renderReportList('employee-report-list',mine,'employee-report-order','employee-report-month','You have not sent a report yet.');}}
 function renderOverview(){document.getElementById('stat-staff').textContent=portalData.staff.length;document.getElementById('stat-clocked').textContent=portalData.timeEntries.filter(function(entry){return entry.date===todayKey()&&entry.timeIn&&!entry.timeOut;}).length;document.getElementById('stat-reports').textContent=portalData.reports.filter(function(report){return report.date===todayKey();}).length;var pending=portalData.expenses.filter(function(item){return item.status==='Pending';}).reduce(function(sum,item){return sum+(Number(item.amount)||0);},0);document.getElementById('stat-expenses').textContent=moneyFormat.format(pending);var activity=document.getElementById('admin-activity');activity.replaceChildren();portalData.timeEntries.filter(function(entry){return entry.date===todayKey();}).forEach(function(entry){activity.appendChild(recordItem(personName(entry.staffId),['Time in '+entry.timeIn+(entry.timeOut?' · Time out '+entry.timeOut:' · Still working')],entry.date));});portalData.reports.filter(function(report){return report.date===todayKey();}).slice().reverse().forEach(function(report){activity.appendChild(recordItem('Report · '+personName(report.staffId),[report.task,report.work],report.sentAt));});if(!activity.children.length)setEmpty(activity,'No time records or reports today.');}
-function renderAttendance(){var rows=document.getElementById('attendance-rows');rows.replaceChildren();var date=todayKey();document.getElementById('attendance-date').textContent='Today · '+new Date().toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'});portalData.staff.forEach(function(person){var entry=portalData.timeEntries.find(function(item){return item.staffId===person.id&&item.date===date;});var row=document.createElement('tr');addTextCell(row,person.name);var status=addTextCell(row,entry?(entry.timeOut?'Clocked out':'Clocked in'):'Not clocked in');status.className=entry?(entry.timeOut?'attendance-done':'attendance-active'):'attendance-missing';addTextCell(row,entry&&entry.timeIn?entry.timeIn:'—');addTextCell(row,entry&&entry.timeOut?entry.timeOut:'—');rows.appendChild(row);});if(!rows.children.length){var empty=document.createElement('tr');var cell=addTextCell(empty,'No employees in the staff directory.');cell.colSpan=4;cell.className='portal-empty';rows.appendChild(empty);}}
+function renderAttendance(){var rows=document.getElementById('attendance-rows');rows.replaceChildren();var date=document.getElementById('attendance-date-filter')?.value||todayKey();document.getElementById('attendance-date').textContent=(date===todayKey()?'Today · ':'Selected date · ')+new Date(date+'T12:00:00').toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'});portalData.staff.forEach(function(person){var entry=portalData.timeEntries.find(function(item){return item.staffId===person.id&&item.date===date;});var row=document.createElement('tr');addTextCell(row,person.name);var status=addTextCell(row,entry?(entry.timeOut?'Clocked out':'Clocked in'):'Not clocked in');status.className=entry?(entry.timeOut?'attendance-done':'attendance-active'):'attendance-missing';addTextCell(row,entry&&entry.timeIn?entry.timeIn:'—');addTextCell(row,entry&&entry.timeOut?entry.timeOut:'—');rows.appendChild(row);});if(!rows.children.length){var empty=document.createElement('tr');var cell=addTextCell(empty,'No employees in the staff directory.');cell.colSpan=4;cell.className='portal-empty';rows.appendChild(empty);}}
 function renderEmployee(){if(!currentUser||currentUser.role!=='employee')return;var date=todayKey();document.getElementById('employee-today').textContent=new Date().toLocaleDateString(undefined,{month:'short',day:'numeric'});var entry=portalData.timeEntries.find(function(item){return item.staffId===currentUser.id&&item.date===date;});document.getElementById('clock-time').textContent=entry?(entry.timeOut?'In '+entry.timeIn+' · Out '+entry.timeOut:'In '+entry.timeIn):'Not started';document.getElementById('clock-button').textContent=entry&&!entry.timeOut?'Time out':'Time in';document.getElementById('clock-button').disabled=Boolean(entry&&entry.timeOut);document.getElementById('clock-status').textContent=entry&&entry.timeOut?'Your work time for today is recorded.':entry?'Clock out when your shift is finished.':'Start your shift to record today’s time.';document.getElementById('employee-hours').textContent=entry?(entry.timeOut?entry.timeIn+'–'+entry.timeOut:'Since '+entry.timeIn):'Not clocked in';var next=portalData.schedules.filter(function(item){return item.staffId===currentUser.id&&item.date>=date;}).sort(function(a,b){return a.date.localeCompare(b.date);})[0];document.getElementById('employee-next-shift').textContent=next?next.date: 'No shift';}
 function showAdminTab(name){document.querySelectorAll('[data-admin-tab]').forEach(function(tab){tab.setAttribute('aria-selected',String(tab.dataset.adminTab===name));});document.querySelectorAll('[data-admin-section]').forEach(function(section){section.hidden=section.dataset.adminSection!==name;});}
-function openWorkspace(user){currentUser=user;document.getElementById('login-view').hidden=true;document.getElementById('app-view').hidden=false;document.getElementById('admin-view').hidden=user.role!=='admin';document.getElementById('employee-view').hidden=user.role!=='employee';document.getElementById('session-name').textContent=user.name;document.getElementById('session-role').textContent=user.role==='admin'?'Administrator workspace':'Employee workspace · '+user.roleTitle;showAdminTab('overview');renderPortal();}
+function showEmployeeTab(name){document.querySelectorAll('[data-employee-tab]').forEach(function(tab){tab.setAttribute('aria-selected',String(tab.dataset.employeeTab===name));});document.querySelectorAll('.employee-section').forEach(function(section){section.hidden=section.id!=='employee-'+name+'-section';});}
+function openWorkspace(user){currentUser=user;document.getElementById('login-view').hidden=true;document.getElementById('app-view').hidden=false;document.getElementById('admin-view').hidden=user.role!=='admin';document.getElementById('employee-view').hidden=user.role!=='employee';document.getElementById('session-name').textContent=user.name;document.getElementById('session-role').textContent=user.role==='admin'?'Administrator workspace':'Employee workspace · '+user.roleTitle;showAdminTab('overview');showEmployeeTab('tasks');renderPortal();}
 document.getElementById('open-portal').addEventListener('click',function(event){event.preventDefault();portal.showModal();});
 document.querySelector('.portal-close').addEventListener('click',function(){portal.close();});
 portal.addEventListener('click',function(event){if(event.target===portal)portal.close();});
-document.getElementById('login-form').addEventListener('submit',function(event){event.preventDefault();var data=new FormData(event.currentTarget);var email=String(data.get('email')).trim().toLowerCase();var password=String(data.get('password'));var user=null;if(email==='admin@infinite-demo.test'&&password==='Admin123!')user={role:'admin',name:'Demo Administrator'};else{var person=portalData.staff.find(function(item){return item.email.toLowerCase()===email;});if(person&&password==='Staff123!')user={role:'employee',id:person.id,name:person.name,roleTitle:person.role};}if(!user){document.getElementById('login-status').textContent='Sign-in details not recognized. Use a fictional demo account shown below.';return;}document.getElementById('login-status').textContent='';event.currentTarget.reset();openWorkspace(user);});
-document.getElementById('logout-button').addEventListener('click',function(){currentUser=null;document.getElementById('app-view').hidden=true;document.getElementById('login-view').hidden=false;document.getElementById('login-status').textContent='You have signed out.';});
 document.querySelectorAll('[data-admin-tab]').forEach(function(tab){tab.addEventListener('click',function(){showAdminTab(tab.dataset.adminTab);});});
-document.getElementById('staff-form').addEventListener('submit',function(event){event.preventDefault();var data=new FormData(event.currentTarget);var email=String(data.get('email')).trim().toLowerCase();if(portalData.staff.some(function(person){return person.email.toLowerCase()===email;})){document.getElementById('staff-status').textContent='That email is already in the demo staff list.';return;}portalData.staff.push({id:'staff-'+Date.now(),name:String(data.get('name')).trim(),role:String(data.get('role')).trim(),email:email,salary:Number(data.get('salary'))||0});var saved=savePortalData();event.currentTarget.reset();renderPortal();document.getElementById('staff-status').textContent=saved?'Staff member added. Demo password: Staff123!.':'Added for this session; browser storage is unavailable.';});
-document.getElementById('payroll-form').addEventListener('submit',function(event){event.preventDefault();var data=new FormData(event.currentTarget);portalData.payroll.push({id:'pay-'+Date.now(),staffId:data.get('staffId'),period:data.get('period'),amount:Number(data.get('amount')),status:data.get('status')});savePortalData();event.currentTarget.reset();renderPortal();});
-document.getElementById('expense-form').addEventListener('submit',function(event){event.preventDefault();var data=new FormData(event.currentTarget);portalData.expenses.push({id:'expense-'+Date.now(),staffId:data.get('staffId'),category:String(data.get('category')).trim(),description:String(data.get('description')).trim(),amount:Number(data.get('amount')),status:'Pending',createdAt:new Date().toLocaleDateString()});savePortalData();event.currentTarget.reset();renderPortal();});
-document.getElementById('expense-rows').addEventListener('click',function(event){var id=event.target.dataset.paidExpense;if(!id)return;var expense=portalData.expenses.find(function(item){return item.id===id;});if(expense)expense.status='Paid';savePortalData();renderPortal();});
-document.getElementById('schedule-form').addEventListener('submit',function(event){event.preventDefault();var data=new FormData(event.currentTarget);portalData.schedules.push({id:'schedule-'+Date.now(),staffId:data.get('staffId'),date:data.get('date'),start:data.get('start'),end:data.get('end'),site:String(data.get('site')).trim()});savePortalData();event.currentTarget.reset();renderPortal();});
-document.getElementById('task-form').addEventListener('submit',function(event){event.preventDefault();var data=new FormData(event.currentTarget);portalData.tasks.push({id:'task-'+Date.now(),staffId:data.get('staffId'),date:data.get('date'),title:String(data.get('title')).trim(),details:String(data.get('details')).trim(),completed:false});savePortalData();event.currentTarget.reset();renderPortal();});
-document.getElementById('admin-task-list').addEventListener('click',function(event){var id=event.target.dataset.completeTask;if(!id)return;var task=portalData.tasks.find(function(item){return item.id===id;});if(task)task.completed=true;savePortalData();renderPortal();});
-document.getElementById('employee-task-list').addEventListener('click',function(event){var id=event.target.dataset.completeTask;if(!id)return;var task=portalData.tasks.find(function(item){return item.id===id&&item.staffId===currentUser.id;});if(task)task.completed=true;savePortalData();renderPortal();});
-document.getElementById('clock-button').addEventListener('click',function(){if(!currentUser||currentUser.role!=='employee')return;var date=todayKey();var entry=portalData.timeEntries.find(function(item){return item.staffId===currentUser.id&&item.date===date;});var time=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});if(!entry)portalData.timeEntries.push({id:'time-'+Date.now(),staffId:currentUser.id,date:date,timeIn:time,timeOut:''});else if(!entry.timeOut)entry.timeOut=time;savePortalData();renderPortal();});
-document.getElementById('report-form').addEventListener('submit',function(event){event.preventDefault();var form=event.currentTarget;var data=new FormData(form);var files=Array.from(form.elements.media.files);var oversized=files.find(function(file){return file.size>50*1024*1024;});var status=document.getElementById('report-status');if(oversized){status.textContent='Each photo or video must be under 50 MB.';return;}var id='report-'+Date.now();var report={id:id,staffId:currentUser.id,date:data.get('date'),site:String(data.get('site')).trim(),task:String(data.get('task')).trim(),work:String(data.get('work')).trim(),next:String(data.get('next')).trim(),files:files.map(function(file){return{name:file.name,type:file.type};}),sentAt:new Date().toLocaleString()};reportMedia[id]=files.map(function(file){return{name:file.name,type:file.type,url:URL.createObjectURL(file)};});portalData.reports.push(report);var saved=savePortalData();form.reset();form.elements.date.value=todayKey();renderPortal();status.textContent=saved?'Report sent to the admin workspace.':'Report sent for this session; browser storage is unavailable.';});
+document.querySelectorAll('[data-employee-tab]').forEach(function(tab){tab.addEventListener('click',function(){showEmployeeTab(tab.dataset.employeeTab);});});
+[['admin-report-order','admin-report-month','admin-report-clear'],['employee-report-order','employee-report-month','employee-report-clear']].forEach(function(ids){[ids[0],ids[1]].forEach(function(id){document.getElementById(id).addEventListener('change',renderReports);});document.getElementById(ids[2]).addEventListener('click',function(){document.getElementById(ids[1]).value='';renderReports();});});
 document.getElementById('report-form').elements.date.value=todayKey();
 var chatPanel=document.getElementById('chat-panel');
 var chatLauncher=document.getElementById('chat-launcher');
@@ -490,5 +638,167 @@ document.getElementById('f').addEventListener('submit',function(e){
   document.getElementById('st').textContent='Opening your email app. If nothing happens, call us on +63 906 008 2540.';
 });
 </script>
+  <script>
+  (function(){
+    var api='/api/portal';
+    var pendingTempPassword='';
+    async function apiRequest(path,options){
+      var response=await fetch(api+path,Object.assign({cache:'no-store'},options||{}));
+      var result=await response.json().catch(function(){return {};});
+      if(!response.ok){var error=new Error(result.error||'The portal server could not complete the request');error.status=response.status;throw error;}
+      return result;
+    }
+    function jsonOptions(method,body){return {method:method,headers:{'Content-Type':'application/json'},body:JSON.stringify(body)};}
+    function showStatus(id,message){var element=document.getElementById(id);if(element)element.textContent=message;}
+    function showLoginState(status){
+      var setup=Boolean(status.setupRequired);
+      document.getElementById('setup-view').hidden=!setup;
+      document.getElementById('login-form').hidden=setup;
+      document.getElementById('login-standard').hidden=setup;
+      if(setup)showStatus('setup-status','');
+    }
+    async function refreshPortalData(){
+      var data;
+      try{data=await apiRequest('/data');}
+      catch(error){
+        if(error.status===401){
+          currentUser=null;
+          document.getElementById('app-view').hidden=true;
+          document.getElementById('login-view').hidden=false;
+          document.getElementById('login-form').hidden=false;
+          document.getElementById('login-standard').hidden=false;
+          document.getElementById('setup-view').hidden=true;
+          showStatus('login-status','Your session expired. Please sign in again.');
+        }
+        throw error;
+      }
+      if(data.currentUser.role==='employee')notifyEmployeeTasks(data.tasks,data.currentUser);
+      else{knownEmployeeTaskIds=null;newEmployeeTaskIds.clear();}
+      portalData=data;
+      currentUser=data.currentUser;
+      data.reports.forEach(function(report){reportMedia[report.id]=(report.files||[]).map(function(file){return {name:file.name,type:file.type,url:file.url};});});
+      renderPortal();
+      return data;
+    }
+    async function refreshSession(){
+      var status=await apiRequest('/status');
+      showLoginState(status);
+      if(status.user){
+        document.getElementById('login-view').hidden=true;
+        document.getElementById('app-view').hidden=false;
+        var data=await refreshPortalData();
+        openWorkspace(data.currentUser);
+      }else{
+        currentUser=null;
+        document.getElementById('app-view').hidden=true;
+        document.getElementById('login-view').hidden=false;
+      }
+    }
+    function stopLegacy(event){event.preventDefault();event.stopImmediatePropagation();}
+    document.getElementById('setup-form').addEventListener('submit',async function(event){
+      stopLegacy(event);
+      var form=event.currentTarget;
+      var data=new FormData(form);
+      try{
+        var result=await apiRequest('/setup',jsonOptions('POST',{name:data.get('name'),email:data.get('email'),password:data.get('password')}));
+        form.reset();
+        await refreshPortalData();
+        openWorkspace(portalData.currentUser||result.user);
+      }catch(error){showStatus('setup-status',error.message);}
+    },true);
+    document.getElementById('login-form').addEventListener('submit',async function(event){
+      stopLegacy(event);
+      var form=event.currentTarget;
+      var data=new FormData(form);
+      try{
+        var result=await apiRequest('/login',jsonOptions('POST',{email:data.get('email'),password:data.get('password')}));
+        form.reset();
+        var workspace=await refreshPortalData();
+        openWorkspace(workspace.currentUser||result.user);
+      }catch(error){showStatus('login-status',error.message);}
+    },true);
+    document.getElementById('logout-button').addEventListener('click',async function(event){
+      stopLegacy(event);
+      try{await apiRequest('/logout',{method:'POST'});}catch(error){}
+      currentUser=null;
+      knownEmployeeTaskIds=null;newEmployeeTaskIds.clear();
+      document.getElementById('app-view').hidden=true;
+      document.getElementById('login-view').hidden=false;
+      document.getElementById('login-status').textContent='You have signed out.';
+      await refreshSession();
+    },true);
+    document.getElementById('password-form').addEventListener('submit',async function(event){
+      stopLegacy(event);var form=event.currentTarget;var data=new FormData(form);
+      try{await apiRequest('/password',jsonOptions('POST',{currentPassword:data.get('currentPassword'),newPassword:data.get('newPassword')}));form.reset();showStatus('password-status','Password updated. Other signed-in sessions were closed.');}
+      catch(error){showStatus('password-status',error.message);}
+    },true);
+    document.getElementById('open-portal').addEventListener('click',function(){refreshSession().catch(function(error){showStatus('login-status',error.message);});});
+    document.getElementById('staff-form').addEventListener('submit',async function(event){
+      stopLegacy(event);
+      var form=event.currentTarget;var data=new FormData(form);
+      try{
+        var result=await apiRequest('/staff',jsonOptions('POST',{name:data.get('name'),role:data.get('role'),email:data.get('email'),salary:data.get('salary')}));
+        pendingTempPassword=result.temporaryPassword;
+        form.reset();await refreshPortalData();
+        showStatus('staff-status','Employee account created. Temporary password (shown once): '+pendingTempPassword);
+        pendingTempPassword='';
+      }catch(error){showStatus('staff-status',error.message);}
+    },true);
+    document.getElementById('payroll-form').addEventListener('submit',async function(event){
+      stopLegacy(event);var form=event.currentTarget;var data=new FormData(form);
+      try{await apiRequest('/payroll',jsonOptions('POST',{staffId:data.get('staffId'),period:data.get('period'),amount:data.get('amount'),status:data.get('status')}));form.reset();await refreshPortalData();}
+      catch(error){form.querySelector('.portal-note')?.remove();showStatus('payroll-status',error.message);}
+    },true);
+    document.getElementById('expense-form').addEventListener('submit',async function(event){
+      stopLegacy(event);var form=event.currentTarget;var data=new FormData(form);
+      try{await apiRequest('/expenses',jsonOptions('POST',{staffId:data.get('staffId'),category:data.get('category'),description:data.get('description'),amount:data.get('amount')}));form.reset();await refreshPortalData();}
+      catch(error){showStatus('expense-status',error.message);}
+    },true);
+    document.getElementById('schedule-form').addEventListener('submit',async function(event){
+      stopLegacy(event);var form=event.currentTarget;var data=new FormData(form);
+      try{await apiRequest('/schedules',jsonOptions('POST',{staffId:data.get('staffId'),date:data.get('date'),start:data.get('start'),end:data.get('end'),site:data.get('site')}));form.reset();await refreshPortalData();}
+      catch(error){showStatus('schedule-status',error.message);}
+    },true);
+    document.getElementById('task-form').addEventListener('submit',async function(event){
+      stopLegacy(event);var form=event.currentTarget;var data=new FormData(form);
+      try{await apiRequest('/tasks',jsonOptions('POST',{staffId:data.get('staffId'),date:data.get('date'),title:data.get('title'),details:data.get('details')}));form.reset();await refreshPortalData();}
+      catch(error){showStatus('task-status',error.message);}
+    },true);
+    document.getElementById('report-form').addEventListener('submit',async function(event){
+      stopLegacy(event);var form=event.currentTarget;var data=new FormData(form);
+      try{
+        var response=await fetch(api+'/reports',{method:'POST',body:data,cache:'no-store'});
+        var result=await response.json().catch(function(){return {};});
+        if(!response.ok)throw new Error(result.error||'Could not send your work report');
+        form.reset();form.elements.date.value=todayKey();await refreshPortalData();showStatus('report-status','Report and attachments were saved on the server and sent to the admin workspace.');
+      }catch(error){showStatus('report-status',error.message);}
+    },true);
+    portal.addEventListener('click',async function(event){
+      var paid=event.target.closest('[data-paid-expense]');
+      var completed=event.target.closest('[data-complete-task]');
+      if(!paid&&!completed)return;
+      stopLegacy(event);
+      try{
+        if(paid)await apiRequest('/expenses/'+encodeURIComponent(paid.dataset.paidExpense)+'/paid',jsonOptions('POST',{}));
+        else{await apiRequest('/tasks/'+encodeURIComponent(completed.dataset.completeTask)+'/complete',jsonOptions('POST',{}));newEmployeeTaskIds.delete(completed.dataset.completeTask);}
+        await refreshPortalData();
+      }catch(error){window.alert(error.message);}
+    },true);
+    document.getElementById('clock-button').addEventListener('click',async function(event){
+      stopLegacy(event);
+      var action=event.currentTarget.textContent.toLowerCase()==='time out'?'out':'in';
+      try{await apiRequest('/time/clock',jsonOptions('POST',{action:action}));await refreshPortalData();}
+      catch(error){showStatus('clock-status',error.message);}
+    },true);
+    setupAdminTableFilters();
+    refreshSession().catch(function(error){
+      document.getElementById('login-view').hidden=false;
+      document.getElementById('app-view').hidden=true;
+      document.getElementById('login-form').hidden=false;
+      showStatus('login-status','Could not connect to the staff portal server: '+error.message);
+    });
+    window.setInterval(function(){if(currentUser&&!portal.hidden)refreshPortalData().catch(function(){});},15000);
+  })();
+  </script>
 </body>
 </html>

@@ -15,15 +15,14 @@ Then open `http://127.0.0.1:8000`. The key is read by the Python server and is n
 
 The server checks every latest user message against the website topics before it can reach the AI provider. Unrelated questions and attempts to override the assistant's instructions receive a fixed refusal. The AI is instructed to answer only from facts published on this site and not to invent missing prices, coverage, or policies. If the key is unset or the AI service is unavailable, the chat clearly switches to its built-in FAQ fallback. Chat messages are sent to the configured AI provider when AI is enabled. Avoid entering sensitive or confidential information. The included server binds to localhost and is for local development only; public deployment needs HTTPS, production-grade rate limiting, and a properly secured backend.
 
-## Staff portal demo
+## Staff portal
 
-Open **Staff portal** on the website and use one of these fictional accounts:
+Start the Python server with `python3 server.py` and open `http://127.0.0.1:8000`. On a new database, open **Staff portal** and create the first administrator account. Use a unique password of at least 12 characters. The setup endpoint closes permanently after the first admin is created.
 
-- Admin: `admin@infinite-demo.test` / `Admin123!`
-- Employee: `alex.rivera@example.test` / `Staff123!`
+Admins create employee accounts from the Staff tab. The server displays a randomly generated temporary password once; give it to that employee securely. Employees can sign in and change it from their workspace. Passwords are stored as salted PBKDF2 hashes. Sign-in sessions use expiring, HttpOnly, SameSite cookies.
 
-The admin demo includes a staff directory, salary records, expenses, schedules, daily task assignments, and submitted work reports. The employee demo includes assigned tasks, time in/time out, schedule visibility, and reports with optional photo/video attachments.
+Staff, attendance, payroll, expenses, schedules, tasks, work reports, and report attachments are stored by the server in SQLite and the private uploads directory under `data/`. The server filters employee results to their own records and restricts admin-only writes and report attachments. The `data/` directory is deliberately excluded from Git and blocked from static website access. Back up the complete `data/` directory regularly and store backups separately from this checkout.
 
-## Prototype limitations
+This included Python server is a single-machine development server bound to localhost. Before using sensitive employee or payroll data in production, deploy behind HTTPS on a maintained production web server, set `PORTAL_COOKIE_SECURE=1`, configure a private persistent `PORTAL_DATA_DIR`, enforce organization-specific retention and access policies, and test backups/restores. Anyone who can administer the host or read its data directory can access the database and uploads. The app does not yet provide password-reset email, audit exports, or automated backup jobs.
 
-This is a static front-end demo. Sign-in credentials are visible in the page, role checks are not secure, and records are stored only in the current browser. Report attachments are previewed locally for the current session and are not uploaded. Do not use real employee, payroll, expense, schedule, or customer information. A production portal needs a server-backed identity system with role-based authorization, secure database storage, and protected media upload/access before handling real staff data.
+Run backend integration tests with `python3 -m unittest -v test_portal_backend`.

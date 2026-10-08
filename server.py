@@ -6,6 +6,9 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
+from urllib.parse import urlsplit
+
+import portal_backend
 
 
 ROOT = Path(__file__).resolve().parent
@@ -49,13 +52,30 @@ class PortalHandler(SimpleHTTPRequestHandler):
         self.wfile.write(body)
 
     def do_GET(self):
+        portal_path = urlsplit(self.path).path
+        if portal_backend.handle_get(self, portal_path):
+            return
         if self.path == "/api/health":
-            self._json(200, {"aiEnabled": bool(os.environ.get("OPENAI_API_KEY"))})
+            self._json(200, {"aiEnabled": bool(os.environ.get("OPENAI_API_KEY")), "portalBackend": True})
+            return
+        resolved_path = Path(self.translate_path(self.path)).resolve()
+        public_assets = (ROOT / "assets").resolve()
+        is_page = portal_path in ("/", "/index.html")
+        try:
+            resolved_path.relative_to(public_assets)
+            is_asset = portal_path.startswith("/assets/") and resolved_path.is_file()
+        except ValueError:
+            is_asset = False
+        if not (is_page or is_asset):
+            self.send_error(404, "Not found")
             return
         super().do_GET()
 
     def do_POST(self):
-        if self.path != "/api/chat":
+        portal_path = urlsplit(self.path).path
+        if portal_backend.handle_post(self, portal_path):
+            return
+        if portal_path != "/api/chat":
             self._json(404, {"error": "Not found"})
             return
 
